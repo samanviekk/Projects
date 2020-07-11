@@ -1,25 +1,31 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 10pt;
 }
-
 img {
   height: 65px;
 }
+
+.logo {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  z-index: 1;
+}
+
+/*
 .logo {
   float: left;
   width: 0;
   margin-left: 5px;
-  margin-top: 2px;
-}
+  margin-top: 5px;
+}*/
 
 article img {
   border-radius: 100%;
-  border: 2px solid lightgray;
   height: 250px;
   width: 250px;
 }
