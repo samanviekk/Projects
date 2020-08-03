@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Header = ({ dark, children, className }) => {
   dark = !!dark ? "dark" : "light";
   return (
