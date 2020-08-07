@@ -1,11 +1,13 @@
 const express = require("express");
 const bp = require("body-parser");
 const UserDB = require("./userdb");
+const cors = require("cors");
 
 const udb = new UserDB();
 const app = express();
 const port = 3001;
 app.use(bp.json());
+app.use(cors());
 app.use(bp.urlencoded({ extended: true }));
 
 app.listen(port, () => {
@@ -15,8 +17,7 @@ app.listen(port, () => {
 udb.initDb();
 
 app.post("/phonebook", (req, res) => {
-  let user = req.body; // { name: "vijay", phone: "408", email:"v@gmail.com"}
-
+  let user = req.body; // { name: "vijay", phone: "408", email:"v@gmail.com"
   udb.addContact(user.name, user.phone, user.email, (err, dbres) => {
     if (err) {
       res.send("Cannot insert..");
