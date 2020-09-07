@@ -1,12 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
+import "./newContact.css";
 
+const Banner = ({ show, status, reason }) => {
+  if (!show) {
+    return null;
+  }
+  return (
+    <div>
+      <h2>{status}</h2>
+      <h3>{reason}</h3>
+    </div>
+  );
+};
 export default class NewContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
       phone: "",
-      email: ""
+      email: "",
+      submit: false,
+      status: "",
+      reason: ""
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -28,32 +43,8 @@ export default class NewContact extends React.Component {
     this.setState({ email: event.target.value });
   }
 
-  /*   handleSubmit(event) {
-    let data = {
-      name: this.state.name,
-      phone: this.state.phone,
-      email: this.state.email
-    };
-
-    let url = "http://localhost:3001/phonebook";
-    fetch(url, {
-      method: "post",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify(data)
-    })
-      .then(function (data) {
-        console.log("Request succeeded with JSON response", data);
-      })
-      .catch(function (error) {
-        console.log("Request failed", error);
-      });
-
-    event.preventDefault();
-  } */
-
   async handleSubmit(event) {
+    event.preventDefault();
     let data = {
       name: this.state.name,
       phone: this.state.phone,
@@ -69,43 +60,65 @@ export default class NewContact extends React.Component {
         },
         body: JSON.stringify(data)
       });
-      let result = resp;
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
+      let result = await resp.json();
 
-    event.preventDefault();
+      this.setState({
+        submit: true,
+        status: result.status,
+        reason: result.reason
+      });
+    } catch (err) {
+      this.setState({
+        status: err.status,
+        reason: err.reason
+      });
+    }
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={this.state.name}
-            onChange={this.handleNameChange}
-          />
-        </label>
-        <label>
-          Phone:
-          <input
-            type="text"
-            value={this.state.phone}
-            onChange={this.handlePhoneChange}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className="contacts">
+        <Banner
+          show={this.state.submit}
+          status={this.state.status}
+          reason={this.state.reason}
+        />
+        <form className="contact-form" onSubmit={this.handleSubmit}>
+          <ul>
+            <li>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  value={this.state.name}
+                  onChange={this.handleNameChange}
+                />
+              </label>
+            </li>
+            <li>
+              <label>
+                Phone:
+                <input
+                  type="text"
+                  value={this.state.phone}
+                  onChange={this.handlePhoneChange}
+                />
+              </label>
+            </li>
+            <li>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleEmailChange}
+                />
+              </label>
+            </li>
+          </ul>
+
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }
