@@ -1,3 +1,5 @@
+import { PRICE_CHANGE } from "../constants";
+
 const initialState = [
   {
     symbol: "GOOG",
@@ -14,5 +16,12 @@ const initialState = [
 ];
 
 export const stocks = (state = initialState, action) => {
+  if (action.type === PRICE_CHANGE) {
+    return state.map(s =>
+      action.symbol === s.symbol
+        ? { symbol: s.symbol, price: action.newPrice }
+        : s
+    );
+  }
   return state;
 };

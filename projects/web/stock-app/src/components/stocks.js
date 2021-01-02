@@ -1,6 +1,16 @@
 import React, { useRef } from "react";
+import styled from "styled-components";
 
 const Stock = props => {
+  const Button = styled.button`
+    color: palevioletred;
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid palevioletred;
+    border-radius: 3px;
+  `;
+
   const { index, price, symbol } = props;
   const qtyInput = useRef(null);
   const handleBuyButtonClick = index => {
@@ -14,7 +24,9 @@ const Stock = props => {
       <b>{symbol}</b> | <b>{price}</b>
       <label htmlFor="qty">quantity</label>
       <input type="number" id="qty" ref={qtyInput} />
-      <button onClick={() => handleBuyButtonClick(index)}> buy </button>
+      <Button>
+        <button onClick={() => handleBuyButtonClick(index)}> buy </button>
+      </Button>
     </div>
   );
 };

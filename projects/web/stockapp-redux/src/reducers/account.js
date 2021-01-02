@@ -1,7 +1,7 @@
 import { STOCK_BUY } from "../constants";
 
 const initialState = {
-  name: "kalyani",
+  name: "Kalyani",
   balance: 100000
 };
 

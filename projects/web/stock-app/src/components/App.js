@@ -2,6 +2,7 @@ import React from "react";
 import Account from "./account";
 import Stocks from "./stocks";
 import Transactions from "./transactions";
+import styled from "styled-components";
 
 const appState = {
   username: "kalyani",
@@ -47,15 +48,30 @@ class App extends React.Component {
   };
 
   render() {
+    const Title = styled.h1`
+      font-size: 1.5em;
+      text-align: center;
+      color: palevioletred;
+      background-color: lightblue;
+    `;
+
+    const Wrapper = styled.section`
+      padding: 4em;
+      background: papayawhip;
+    `;
+
     const { username, balance, stockList, transactionList } = this.state;
     return (
-      <div className="app">
-        <Account username={username} balance={balance} />
+      <Wrapper>
+        <div className="app">
+          <Title> Stock Application</Title>
+          <Account username={username} balance={balance} />
 
-        <Stocks stocks={stockList} onStockBuy={this.onStockBuy} />
+          <Stocks stocks={stockList} onStockBuy={this.onStockBuy} />
 
-        <Transactions transactions={transactionList} />
-      </div>
+          <Transactions transactions={transactionList} />
+        </div>
+      </Wrapper>
     );
   }
 }

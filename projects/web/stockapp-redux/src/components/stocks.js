@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
-import { buyStockAction } from "../actions";
+import { buyStockAction, priceChange } from "../actions";
 import store from "../store";
 
-const Stock = ({ index, symbol, price, dispatch }) => {
+const StockItem = ({ index, symbol, price, dispatch }) => {
   const qtyInput = useRef(null);
 
   const handleBuyButtonClick = (symbol, price) => {
@@ -13,28 +13,65 @@ const Stock = ({ index, symbol, price, dispatch }) => {
   };
 
   return (
-    <div key={index}>
-      <b>{symbol}</b> | <b>{price}</b>
-      <label htmlFor="qty">quantity</label>
-      <input type="number" id="qty" ref={qtyInput} />
-      <button onClick={() => handleBuyButtonClick(symbol, price)}> buy </button>
+    <div className="row" key={index}>
+      <div className="col">
+        <b>{symbol}</b> | price: <b>${price}</b>
+      </div>
+      <div className="col">
+        <label htmlFor="qty">quantity:</label>
+        <input type="number" id="qty" ref={qtyInput} required />
+      </div>
+      <div className="col">
+        <button
+          className="btn btn-outline-dark btn-block"
+          onClick={() => handleBuyButtonClick(symbol, price)}
+        >
+          buy
+        </button>
+      </div>
     </div>
   );
 };
 
-const Stocks = props => {
-  const { stocks } = props;
-  let stockItems = stocks.map((stock, index) => (
-    <Stock
-      key={index}
-      index={index}
-      symbol={stock.symbol}
-      price={stock.price}
-      onStockBuy={props.onStockBuy}
-    />
-  ));
-  return <div>{stockItems}</div>;
-};
+class Stocks extends React.Component {
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      let stocks = this.props.stocks;
+      if (stocks.length === 0) return;
+      let number = Math.floor(Math.random() * 10);
+      let index = number % stocks.length;
+      let symbol = stocks[index].symbol;
+      let price = stocks[index].price;
+      if (number % 2 === 0) {
+        price = price + number;
+      } else {
+        price = price - number > 0 ? price - number : price;
+      }
+      store.dispatch(priceChange(symbol, price));
+    }, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  render() {
+    const { stocks } = this.props;
+    let stockItems = stocks.map((stock, index) => (
+      <StockItem
+        key={index}
+        index={index}
+        symbol={stock.symbol}
+        price={stock.price}
+        onStockBuy={this.props.onStockBuy}
+      />
+    ));
+    return (
+      <div>
+        <h3>TRADING</h3>
+        <div class="card">{stockItems}</div>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   stocks: state.stocks

@@ -2,11 +2,10 @@ import React from "react";
 import Account from "./account";
 import Stocks from "./stocks";
 import Transactions from "./transactions";
-
+//import StockChart from "./stockChart";
+import ChartDemo from "./chartDemo";
+import "./App.css";
 class App extends React.Component {
-  constructor() {
-    super();
-  }
   onStockBuy = (index, qty) => {};
   onStockSell = (index, qty) => {
     console.log("App", index, qty);
@@ -14,12 +13,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
-        <Account />
+      <div class="container-fluid">
+        <div className="app">
+          <Account />
 
-        <Stocks />
+          <Stocks />
 
-        <Transactions />
+          <Transactions />
+        </div>
       </div>
     );
   }
