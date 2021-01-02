@@ -1,0 +1,50 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightskyblue;
+  font-family: "calibri", sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  background: white;
+  flex: 0 0 80%;
+  text-align: center;
+  border-radius: 7px;
+  padding: 2rem;
+}
+
+.msg-input {
+  border: 2px solid lightskyblue;
+}
+
+.msg-input[type="text"]:focus {
+  box-shadow: 0 0 20px lightskyblue;
+}
+
+.msg-btn {
+  display: block;
+  background: lightskyblue;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 7px;
+  color: white;
+  border: white;
+}
+
+.msg-btn:hover {
+  background-color: white;
+  color: lightskyblue;
+  border: 2px solid lightskyblue;
+  font-size: 1rem;
+}
+
+#msg {
+  margin: 0.5rem 0;
+  color: lightskyblue;
+}

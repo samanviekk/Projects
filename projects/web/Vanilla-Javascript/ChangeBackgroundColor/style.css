@@ -1,0 +1,25 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f1f1f1;
+}
+
+.color-btn {
+  padding: 0.5rem 0.7rem;
+  border: 3px solid black;
+  border-radius: 10px;
+  background: dimgray;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.color-btn:hover {
+  background: rosybrown;
+  color: black;
+  border: 3px solid black;
+  text-shadow: fuchsia;
+}

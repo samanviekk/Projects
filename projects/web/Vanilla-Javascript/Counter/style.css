@@ -1,0 +1,45 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("abstract.png") center/cover no-repeat;
+  /*background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;*/
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
+}
+
+.counter-box {
+  flex: 0 0 70%;
+  text-align: center;
+  border: 3px solid grey;
+  padding: 1rem;
+  font-weight: bold;
+  box-shadow: 3px 3px 10px 10px black;
+}
+
+.counter {
+  font-size: 6rem;
+}
+
+.btn {
+  background: white;
+  border-radius: 8px;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: 1rem 0.5rem;
+  border: 3px solid salmon;
+  box-shadow: 2px 5px blueviolet;
+  outline: none;
+}
+
+.btn:hover {
+  background: lightsteelblue;
+}
+
+.btn:active {
+  box-shadow: none;
+}

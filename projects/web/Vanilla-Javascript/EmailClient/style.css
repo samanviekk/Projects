@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  background-color: olive;
+}
+
+.folder {
+  background-color: lightcoral;
+  width: 20%;
+}
+
+.msg-list {
+  background-color: mediumaquamarine;
+  width: 30%;
+}
+
+.msg-list > div {
+  background-color: white;
+  border: 2px solid black;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.complete-msg {
+  background: mediumspringgreen;
+  width: 50%;
+}
